@@ -1,0 +1,2 @@
+# yue
+jobs about embedded
