@@ -50,6 +50,170 @@
 
 总结来说，有源晶振是一个完整的振荡器模块，可以直接输出稳定的频率信号，而无源晶振是一个晶体谐振器，需要外部电路来产生振荡信号。选择有源晶振还是无源晶振取决于具体的应用需求、成本预算和设计复杂度。
 
+### 内部晶振和外部晶振
+
+内部晶振（Internal Crystal Oscillator）和外部晶振（External Crystal Oscillator）是电子设备中用于产生时钟信号的两种不同配置方式。它们的主要区别在于晶振的位置和集成方式。
+
+**内部晶振（Internal Crystal Oscillator）：**
+
+内部晶振是指晶振电路集成在芯片或微控制器内部的配置。这种晶振通常是一个RC振荡器（Resistor-Capacitor Oscillator）或一个集成的晶体振荡器。
+
+内部晶振的优点是简化了外部电路设计，不需要外部晶体和电容，从而减少了电路板的复杂性和成本。
+
+内部晶振的缺点是通常精度不如外部晶振高，且频率稳定性可能较差。因此，内部晶振通常用于对时钟精度要求不高的应用。
+
+**外部晶振（External Crystal Oscillator）：**
+
+外部晶振是指晶振电路位于芯片或微控制器外部，通常是一个外部晶体或陶瓷谐振器，配合两个外部电容构成一个完整的振荡电路。
+
+外部晶振的优点是能够提供更高的频率精度和稳定性，因为外部晶体通常比内部晶振更精确。
+
+外部晶振的缺点是需要外部元件，增加了电路板的复杂性和成本。
+
+总结来说，内部晶振和外部晶振的选择取决于应用的具体需求。如果对时钟信号的精度和稳定性要求较高，通常会选择外部晶振；如果对成本和电路简化要求较高，且对时钟精度要求不高，则可以选择内部晶振。在微控制器（如STM32）中，通常既支持内部晶振（如HSI，High-Speed Internal），也支持外部晶振（如HSE，High-Speed External），用户可以根据实际应用需求进行选择。
+
+### 时钟的作用
+
+同步操作：
+
+时钟信号为数字电路中的各个部件提供同步信号，确保它们在正确的时间点执行操作。例如，在微控制器中，时钟信号同步CPU、内存、外设等模块的操作，确保数据处理和传输的正确性。
+
+控制数据流：
+
+时钟信号决定了数据在数字系统中的流动速度和时序。在同步数字电路中，数据通常在时钟的上升沿或下降沿被采样或传输，时钟信号的频率决定了数据处理的速度。
+
+计时和定时：
+
+时钟信号用于计时和定时功能，例如实时时钟（RTC）用于记录时间和日期，定时器用于生成精确的时间延迟或周期性事件。
+
+频率合成：
+
+时钟信号可以通过锁相环（PLL）等电路进行频率合成，生成不同频率的时钟信号，以满足不同模块和外设的需求。
+
+节能管理：
+
+时钟信号可以用于节能管理，例如在低功耗模式下，可以通过降低时钟频率或关闭不必要的时钟信号来减少功耗。
+
+系统稳定性：
+
+稳定的时钟信号对于系统的稳定运行至关重要。高精度和高稳定性的时钟信号可以减少系统错误和数据丢失的风险。
+
+
+
+## 介绍stm32时钟部分：
+
+在STM32微控制器中，时钟系统是一个非常关键的部分，它负责为微控制器的各个模块提供同步信号。STM32的时钟系统通常包括以下几种时钟源：
+
+1. **高速外部时钟（HSE，High-Speed External）**：
+   - HSE通常是一个外部晶体振荡器或陶瓷谐振器，配合两个外部电容构成一个振荡电路。HSE可以提供较高的频率，通常为4-26 MHz，具体取决于所使用的晶体或谐振器。
+   - HSE的优点是频率精度高，稳定性好，适用于对时钟精度要求较高的应用。
+
+2. **高速内部时钟（HSI，High-Speed Internal）**：
+   - HSI是STM32内部集成的RC振荡器，可以直接提供时钟信号，不需要外部晶体或谐振器。HSI的典型频率为16 MHz。
+   - HSI的优点是成本低，电路设计简单，但频率精度和稳定性通常不如HSE。
+
+3. **低速外部时钟（LSE，Low-Speed External）**：
+   - LSE通常是一个32.768 kHz的外部晶体振荡器，用于提供低速、高精度的时钟信号，常用于实时时钟（RTC）和日历功能。
+   - LSE的优点是频率稳定，适用于需要长时间计时和低功耗的应用。
+
+4. **低速内部时钟（LSI，Low-Speed Internal）**：
+   - LSI是STM32内部集成的RC振荡器，频率通常为32-40 kHz，用于提供低速时钟信号，常用于RTC和独立看门狗（IWDG）。
+   - LSI的优点是成本低，电路设计简单，但频率精度和稳定性通常不如LSE。
+
+STM32的时钟系统还包括时钟树（Clock Tree），它负责将上述时钟源分配到微控制器的各个模块。时钟树通常包括以下几个部分：
+
+- **系统时钟（SYSCLK）**：微控制器的主时钟，可以由HSE、HSI或PLL（锁相环）产生。
+- **AHB总线时钟（HCLK）**：用于微控制器的高速总线（AHB），通常是SYSCLK的分频。
+- **APB1总线时钟（PCLK1）**：用于微控制器的低速外设总线（APB1），通常是HCLK的分频。
+- **APB2总线时钟（PCLK2）**：用于微控制器的高速外设总线（APB2），通常是HCLK的分频。
+
+通过配置时钟树，可以灵活地为微控制器的各个模块分配不同的时钟频率，以满足不同应用的需求。
+
+
+## 配置系统时钟，总线时钟
+
+### HSE
+
+```c
+  RCC_CR  |= RCC_CR_HSEON;
+	while(!(RCC_CR & RCC_CR_HSERDY ));
+	RCC_CFGR |= RCC_CFGR_SW_HSE;
+	while ((RCC_CFGR & RCC_CFGR_SWS) != RCC_CFGR_SWS_HSE);
+```
+
+### HSI
+
+```c
+RCC_CR  |= RCC_CR_HSION;
+while(!(RCC_CR & RCC_CR_HSIRDY ));
+RCC_CFGR |= RCC_CFGR_SW_HSI;
+while ((RCC_CFGR & RCC_CFGR_SWS) != RCC_CFGR_SWS_HSI);
+```
+
+### 主PLL
+
+```c
+  RCC_CR  |= RCC_CR_HSEON;
+	while((RCC_CR & RCC_CR_HSERDY )==0); 
+	
+	
+	//使能电源接口时钟
+  RCC_APB1ENR |= RCC_APB1ENR_PWREN;
+
+
+  PWR_CR |= PWR_CR_VOS;
+
+	
+  // 配置AHB分频器
+  RCC_CFGR |= AHB_PRESCALER ;
+
+  // 配置APB1分频器
+  RCC_CFGR |= APB1_PRESCALER ;
+
+  // 配置APB2分频器
+  RCC_CFGR |= APB2_PRESCALER ;
+	
+ 	RCC_PLLCFGR |=PLL_M_HSE ;
+		RCC_PLLCFGR |=PLL_N ;
+		RCC_PLLCFGR |=PLL_P ;
+		RCC_PLLCFGR |=PLL_Q ;	
+		RCC_PLLCFGR |=RCC_PLLCFGR_PLLSRC;		
+ // RCC_PLLCFGR = (PLL_M_HSE << 0) | (PLL_N << 6) | (PLL_P << 16) | (PLL_Q << 24) | (RCC_PLLCFGR_PLLSRC);
+ 
+ 
+  RCC_CR |=RCC_CR_PLLON ;
+  while((RCC_CR & RCC_CR_PLLRDY ) == 0)	;
+	
+	/*为什么一定要加上这一行!!!!!!!!!!!!!!!!!!!!*/
+	//Flash预取、指令缓存、数据缓存和等待状态
+	FLASH_ACR = FLASH_ACR_PRFTEN | FLASH_ACR_ICEN |FLASH_ACR_DCEN |FLASH_ACR_LATENCY_5WS;
+
+  RCC_CFGR |=RCC_CFGR_SW_PLL;
+	while ((RCC_CFGR & RCC_CFGR_SWS) != RCC_CFGR_SWS_PLL);
+
+```
+
+**!!!**
+
+```c
+FLASH_ACR = FLASH_ACR_PRFTEN | FLASH_ACR_ICEN |FLASH_ACR_DCEN |FLASH_ACR_LATENCY_5WS;
+```
+
+ 系统时钟频率与Flash访问速度的匹配
+在高系统时钟频率下，CPU的执行速度会显著提高，但Flash的访问速度相对较慢。为了确保CPU能够高效地访问Flash，需要进行以下优化：
+
+预取缓冲区（Prefetch Buffer）：启用预取缓冲区可以提高Flash的读取速度。预取缓冲区在读取Flash数据时提前预取数据，减少等待时间，从而提高系统性能。
+
+指令缓存（Instruction Cache）：启用指令缓存可以加速指令的读取和执行。指令缓存将频繁执行的指令存储在高速缓存中，减少从Flash读取指令的次数，提高CPU的执行效率。
+
+数据缓存（Data Cache）：启用数据缓存可以加速数据的读取和写入。数据缓存将频繁访问的数据存储在高速缓存中，减少从Flash读取数据的次数，提高数据访问速度。
+
+等待状态（Latency）：设置Flash访问的等待状态。在高系统时钟频率下，Flash访问需要更多的等待时间，以确保数据可靠读取。FLASH_ACR_LATENCY_5WS 表示设置5个等待状态，以适应更高的系统时钟频率。
+
+2. 实验结果分析
+没有优化Flash访问性能：在没有加上 FLASH_ACR = FLASH_ACR_PRFTEN | FLASH_ACR_ICEN | FLASH_ACR_DCEN | FLASH_ACR_LATENCY_5WS; 这一句代码的情况下，PLL配置可能不成功，LED没有闪烁。这表明在高系统时钟频率下，Flash访问速度跟不上CPU的执行速度，导致系统不稳定或无法正常工作。
+
+优化Flash访问性能：在加上这一句代码后，LED成功闪烁。这表明通过优化Flash访问性能，系统在高时钟频率下能够稳定运行，CPU能够高效地访问Flash，从而实现预期的功能。
 
 
 
