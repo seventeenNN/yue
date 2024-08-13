@@ -158,10 +158,10 @@ while ((RCC_CFGR & RCC_CFGR_SWS) != RCC_CFGR_SWS_HSI);
 	
 	
 	//使能电源接口时钟
-  RCC_APB1ENR |= RCC_APB1ENR_PWREN;
+  //RCC_APB1ENR |= RCC_APB1ENR_PWREN;
 
 
-  PWR_CR |= PWR_CR_VOS;
+ // PWR_CR |= PWR_CR_VOS;
 
 	
   // 配置AHB分频器
@@ -199,7 +199,7 @@ while ((RCC_CFGR & RCC_CFGR_SWS) != RCC_CFGR_SWS_HSI);
 FLASH_ACR = FLASH_ACR_PRFTEN | FLASH_ACR_ICEN |FLASH_ACR_DCEN |FLASH_ACR_LATENCY_5WS;
 ```
 
- 系统时钟频率与Flash访问速度的匹配
+1. 系统时钟频率与Flash访问速度的匹配
 在高系统时钟频率下，CPU的执行速度会显著提高，但Flash的访问速度相对较慢。为了确保CPU能够高效地访问Flash，需要进行以下优化：
 
 预取缓冲区（Prefetch Buffer）：启用预取缓冲区可以提高Flash的读取速度。预取缓冲区在读取Flash数据时提前预取数据，减少等待时间，从而提高系统性能。
@@ -215,6 +215,26 @@ FLASH_ACR = FLASH_ACR_PRFTEN | FLASH_ACR_ICEN |FLASH_ACR_DCEN |FLASH_ACR_LATENCY
 
 优化Flash访问性能：在加上这一句代码后，LED成功闪烁。这表明通过优化Flash访问性能，系统在高时钟频率下能够稳定运行，CPU能够高效地访问Flash，从而实现预期的功能。
 
+**解释**
 
+1. FLASH_ACR_PRFTEN
+预取缓冲区使能（Prefetch Buffer Enable）：启用Flash预取缓冲区，可以提高Flash的读取速度。预取缓冲区在读取Flash数据时提前预取数据，减少等待时间，从而提高系统性能。
 
+2. FLASH_ACR_ICEN
+指令缓存使能（Instruction Cache Enable）：启用指令缓存，可以加速指令的读取和执行。指令缓存将频繁执行的指令存储在高速缓存中，减少从Flash读取指令的次数，提高CPU的执行效率。
+
+3. FLASH_ACR_DCEN
+数据缓存使能（Data Cache Enable）：启用数据缓存，可以加速数据的读取和写入。数据缓存将频繁访问的数据存储在高速缓存中，减少从Flash读取数据的次数，提高数据访问速度。
+
+4. FLASH_ACR_LATENCY_5WS
+等待状态（Latency）：设置Flash访问的等待状态。在高CPU时钟频率下，Flash访问需要更多的等待时间，以确保数据可靠读取。FLASH_ACR_LATENCY_5WS 表示设置5个等待状态，以适应更高的CPU时钟频率。
+
+通俗解释
+当CPU的时钟频率提高时，CPU的执行速度也会加快，但Flash的访问速度相对较慢。为了确保CPU能够高效地访问Flash，需要进行以下优化：
+
+减少等待时间：通过启用预取缓冲区和设置适当的等待状态，减少CPU在访问Flash时的等待时间，提高系统性能。
+
+加速指令和数据访问：通过启用指令缓存和数据缓存，减少从Flash读取指令和数据的次数，提高CPU的执行效率和数据访问速度。
+
+通过这些优化措施，可以确保在高CPU时钟频率下，Flash的读取速度能够跟上CPU的访问速度，从而提高系统的整体性能和稳定性。
 
