@@ -1,0 +1,6 @@
+Dependencies for Project 'test', Target 'Target 1': (DO NOT MODIFY !)
+CompilerVersion: 5060960::V5.06 update 7 (build 960)::.\ARM_Compiler_5.06u7
+F (.\main.c)(0x66C2E860)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork --split_sections-ID:\qy\keil\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="540" -DSTM32F407xx-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+I (stm32f4xx.h)(0x66C2E435)
+F (.\stm32f4xx.h)(0x66C2E435)()
+F (.\startup_stm32f40xx.s)(0x66C17170)(--cpu Cortex-M4.fp.sp --pd "__EVAL SETA 1" -g --apcs=interwork --pd "__MICROLIB SETA 1"-ID:\qy\keil\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include--pd "__UVISION_VERSION SETA 540" --pd "STM32F407xx SETA 1"--list .\listings\startup_stm32f40xx.lst --xref -o .\objects\startup_stm32f40xx.o --depend .\objects\startup_stm32f40xx.d)
