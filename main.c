@@ -8,7 +8,7 @@ void delay( unsigned int count)
 
 void led_red(void)
 {
-	//RED∫Ï
+	//REDÁ∫¢
 	RCC_AHB1ENR  |=RCC_AHB1ENR_GPIOFEN;
 	GPIOF->MODER |=(1<<(2*6));
 	GPIOF->ODR &=~(1<<6);
@@ -16,14 +16,14 @@ void led_red(void)
 
 void led_green(void)
 {
-	//GREEN¬Ã
+	//GREENÁªø
 	RCC_AHB1ENR  |=RCC_AHB1ENR_GPIOFEN;
 	GPIOF->MODER |=(1<<(2*7));
 	GPIOF->ODR &=~(1<<7);
 }
 void led_blue(void)
 {
-	//BLUE¿∂
+	//BLUEËìù
 	RCC_AHB1ENR  |=RCC_AHB1ENR_GPIOFEN;
 	GPIOF->MODER |=(1<<(2*8));
 	GPIOF->ODR &=~(1<<8);
@@ -31,18 +31,18 @@ void led_blue(void)
 
 void led_config(void)
 {
-/* ---------µ„¡¡LED---------£®≥…π¶£©*/	
-/*	≤Ω÷Ë
-	1.ø™gpio∂Àø⁄ ±÷”
+/* ---------ÁÇπ‰∫ÆLED---------ÔºàÊàêÂäüÔºâ*/	
+/*	Ê≠•È™§
+	1.ÂºÄgpioÁ´ØÂè£Êó∂Èíü
 	RCC_AHB1ENR  |=(1<<5);
-	  | «Œ™¡À±£÷§∆‰À˚Œª≤ª ‹”∞œÏ£¨µ´ « πµ⁄5ŒªŒ™1	
-	2.≈‰÷√MODER
-	  ’‚¿Ôµƒmoder”–¡ΩŒªøÿ÷∆£¨ ◊œ»“™Ω¯––«Â¡„£¨‘ŸΩ¯––…Ë÷√
+	  |ÊòØ‰∏∫‰∫Ü‰øùËØÅÂÖ∂‰ªñ‰Ωç‰∏çÂèóÂΩ±ÂìçÔºå‰ΩÜÊòØ‰ΩøÁ¨¨5‰Ωç‰∏∫1	
+	2.ÈÖçÁΩÆMODER
+	  ËøôÈáåÁöÑmoderÊúâ‰∏§‰ΩçÊéßÂà∂ÔºåÈ¶ñÂÖàË¶ÅËøõË°åÊ∏ÖÈõ∂ÔºåÂÜçËøõË°åËÆæÁΩÆ
 	GPIO_MODER &=~(3<<(2*6));
-	  &÷Æ«∞µƒ≤Ÿ◊˜£¨ πƒø±Íµƒ¡Ω∏ˆŒªŒ™1£¨∆‰À˚ŒªŒ™0£¨»ª∫Û»°∑¥£¨ƒø±ÍŒªŒ™0£¨∆‰À˚ŒªŒ™1£¨
-	  ”Î‘≠¿¥µƒ”Î≤Ÿ◊˜∫Û£¨ƒø±ÍŒªŒ™0,∆‰À˚Œª1
+	  &‰πãÂâçÁöÑÊìç‰ΩúÔºå‰ΩøÁõÆÊ†áÁöÑ‰∏§‰∏™‰Ωç‰∏∫1ÔºåÂÖ∂‰ªñ‰Ωç‰∏∫0ÔºåÁÑ∂ÂêéÂèñÂèçÔºåÁõÆÊ†á‰Ωç‰∏∫0ÔºåÂÖ∂‰ªñ‰Ωç‰∏∫1Ôºå
+	  ‰∏éÂéüÊù•ÁöÑ‰∏éÊìç‰ΩúÂêéÔºåÁõÆÊ†á‰Ωç‰∏∫0,ÂÖ∂‰ªñ‰Ωç1
 	GPIO_MODER |=(1<<(2*6));
-	3.»√gpio ‰≥ˆ0ªÚ1£¨ODRºƒ¥Ê∆˜ªÚ’ﬂBSRRºƒ¥Ê∆˜
+	3.ËÆ©gpioËæìÂá∫0Êàñ1ÔºåODRÂØÑÂ≠òÂô®ÊàñËÄÖBSRRÂØÑÂ≠òÂô®
 	GPIO_ODR |=(1<<6);
 */
 	led_red();
@@ -53,7 +53,7 @@ void led_config(void)
 	GPIOF->ODR |=(1<<7);
 	GPIOF->ODR |=(1<<8);
 	
-/*-----------…¡À∏-----------£®≥…π¶£©*/
+/*-----------Èó™ÁÉÅ-----------ÔºàÊàêÂäüÔºâ*/
 /*
 while (1)
 	{
@@ -77,246 +77,271 @@ while (1)
 
 void key(void)
 {
- //1.ø™ ±÷”,≈‰÷√ºƒ¥Ê∆˜
+ //1.ÂºÄÊó∂Èíü,ÈÖçÁΩÆÂØÑÂ≠òÂô®
 RCC_AHB1ENR  |=RCC_AHB1ENR_GPIOAEN;
 RCC_AHB1ENR  |=RCC_AHB1ENR_GPIOFEN;
 RCC_AHB1ENR  |=RCC_AHB1ENR_GPIOCEN;	
- // ≈‰÷√GPIOAµƒPIN0Œ™ ‰»Î
+ // ÈÖçÁΩÆGPIOAÁöÑPIN0‰∏∫ËæìÂÖ•
 GPIOA->MODER &= ~(3UL << (0  * 2));
- //≈‰÷√GPIOCµƒPIN13Œ™ ‰»Î
+ //ÈÖçÁΩÆGPIOCÁöÑPIN13‰∏∫ËæìÂÖ•
 GPIOC->MODER &= ~(3UL << (13  * 2));
 
 led_config();
 
-//≥÷–¯º‡≤‚ ‰»Îºƒ¥Ê∆˜◊¥Ã¨	
-/*	PA0       (≥…π¶) 
+//ÊåÅÁª≠ÁõëÊµãËæìÂÖ•ÂØÑÂ≠òÂô®Áä∂ÊÄÅ	
+/*	PA0       (ÊàêÂäü) */
 
 while(1)
-	{// ºÏ≤‚∞¥º¸∞¥œ¬
+	{// Ê£ÄÊµãÊåâÈîÆÊåâ‰∏ã
 		if( (GPIOA->IDR & PIN0 )==KEY_ON )	
 			{   		
    				//GPIOF->ODR |=(1<<6); 
 				   //GPIOF->ODR |=(1<<7);
   				//	GPIOF->ODR |=(1<<8);
-					GPIOF->ODR &=~(1<<6);
+					//GPIOF->ODR &=~(1<<6);
 				  //GPIOF->ODR &=~(1<<7);
-					//GPIOF->ODR &=~(1<<8);
+					GPIOF->ODR &=~(1<<8);
 				
 		   }      
     else {
-   				GPIOF->ODR |=(1<<6); 
+   				//GPIOF->ODR |=(1<<6); 
 					//GPIOF->ODR |=(1<<7);
-					//GPIOF->ODR |=(1<<8);
+					GPIOF->ODR |=(1<<8);
 					//GPIOF->ODR &=~(1<<6);
 					//GPIOF->ODR &=~(1<<7);
 					//GPIOF->ODR &=~(1<<8);
 			
           }
 	}
-*/
-/*  PC13      (≥…π¶)
+
+/*  PC13      (ÊàêÂäü)
 while(1)	
-{// ºÏ≤‚∞¥º¸∞¥œ¬
+{// Ê£ÄÊµãÊåâÈîÆÊåâ‰∏ã
 		if( (GPIOC->IDR & PIN13 )==(KEY_ON<<13)  )	
 			{   			
 				
-// ??Œ™ ≤√¥’‚∏ˆ≤ªª·÷¥–– 
-// !!◊¢“‚’‚¿ÔµƒΩ·π˚≤ª «1£¨∂¯ «1<<13!!!		
+// ??‰∏∫‰ªÄ‰πàËøô‰∏™‰∏ç‰ºöÊâßË°å 
+// !!Ê≥®ÊÑèËøôÈáåÁöÑÁªìÊûú‰∏çÊòØ1ÔºåËÄåÊòØ1<<13!!!		
 				
-					GPIOF->ODR |=(1<<6);// ∞¥º¸∞¥œ¬,≤ª¡¡
-		//		GPIOF->ODR &=~(1<<6);// ∞¥º¸∞¥œ¬,¡¡
+					GPIOF->ODR |=(1<<6);// ÊåâÈîÆÊåâ‰∏ã,‰∏ç‰∫Æ
+		//		GPIOF->ODR &=~(1<<6);// ÊåâÈîÆÊåâ‰∏ã,‰∫Æ
 		   }      
     else {
-					GPIOF->ODR &=~(1<<6); // ∞¥º¸ Õ∑≈,¡¡
-			//	GPIOF->ODR |=(1<<6);// ∞¥º¸ Õ∑≈,≤ª¡¡
+					GPIOF->ODR &=~(1<<6); // ÊåâÈîÆÈáäÊîæ,‰∫Æ
+			//	GPIOF->ODR |=(1<<6);// ÊåâÈîÆÈáäÊîæ,‰∏ç‰∫Æ
           }
 }
 */
 
 	
-/*  PA0+PC13	(≥…π¶)
+/*  PA0+PC13	(ÊàêÂäü)
 	while(1)
 	
-	{// ºÏ≤‚∞¥º¸∞¥œ¬
-		if(((GPIOA->IDR & PIN0 )==KEY_ON) &((GPIOC->IDR & PIN13 )==(KEY_ON<<13)) )	//¡Ω∏ˆ“ª∆∞¥œ¬»•
+	{// Ê£ÄÊµãÊåâÈîÆÊåâ‰∏ã
+		if(((GPIOA->IDR & PIN0 )==KEY_ON) &((GPIOC->IDR & PIN13 )==(KEY_ON<<13)) )	//‰∏§‰∏™‰∏ÄËµ∑Êåâ‰∏ãÂéª
 	//if(((GPIOA->IDR & PIN0 )==KEY_ON) |((GPIOC->IDR & PIN13 )==(KEY_ON<<13)) )
 			{   			
-					GPIOF->ODR |=(1<<6);// ∞¥º¸∞¥œ¬,≤ª¡¡
-		//		GPIOF->ODR &=~(1<<6);// ∞¥º¸∞¥œ¬,¡¡
+					GPIOF->ODR |=(1<<6);// ÊåâÈîÆÊåâ‰∏ã,‰∏ç‰∫Æ
+		//		GPIOF->ODR &=~(1<<6);// ÊåâÈîÆÊåâ‰∏ã,‰∫Æ
 		   }      
     else {
-					GPIOF->ODR &=~(1<<6); // ∞¥º¸ Õ∑≈,¡¡
-		//		GPIOF->ODR |=(1<<6);// ∞¥º¸ Õ∑≈,≤ª¡¡
+					GPIOF->ODR &=~(1<<6); // ÊåâÈîÆÈáäÊîæ,‰∫Æ
+		//		GPIOF->ODR |=(1<<6);// ÊåâÈîÆÈáäÊîæ,‰∏ç‰∫Æ
           }
 	}
-	
 */	
 	
+	
 }
-void buzzer(void)//(≥…π¶)
+void buzzer(void)//(ÊàêÂäü)
 {
 
 RCC_AHB1ENR  |=RCC_AHB1ENR_GPIOGEN;
 GPIOG->MODER |=(1<<(2*7));
-GPIOG->OTYPER &=~(1<<7);//∏¥Œª◊¥Ã¨
+GPIOG->OTYPER &=~(1<<7);//Â§ç‰ΩçÁä∂ÊÄÅ
 GPIOG->OSPEEDR |=(3<<(2*7));
-GPIOG->PUPDR  &=~(3<<(2*7));//∏¥Œª◊¥Ã¨
+GPIOG->PUPDR  &=~(3<<(2*7));//Â§ç‰ΩçÁä∂ÊÄÅ
 //GPIOG->ODR &=~(1<<7);
-//GPIOG->ODR |=(1<<7);//œÏ¡¡µƒﬂŸ“ª…˘
+//GPIOG->ODR |=(1<<7);//Âìç‰∫ÆÁöÑÂìî‰∏ÄÂ£∞
 while(1)
 		{
 			delay(0xfffff);
-			GPIOG->ODR |=(1<<7);//œÏ¡¡µƒﬂŸ“ª…˘
+			GPIOG->ODR |=(1<<7);//Âìç‰∫ÆÁöÑÂìî‰∏ÄÂ£∞
 			delay(0xfffff);
-			GPIOG->ODR &=~(1<<7);//Õ£÷π
+			GPIOG->ODR &=~(1<<7);//ÂÅúÊ≠¢
 		}
 }
 
+
+	// ÂÆö‰πâÊ∫êÂíåÁõÆÊ†áÂÜÖÂ≠òÂå∫Âüü
+#define SOURCE_ADDRESS     ((uint32_t)source_buffer)
+#define DESTINATION_ADDRESS ((uint32_t)destination_buffer)
+#define DATA_SIZE          100  // ‰º†ËæìÊï∞ÊçÆÁöÑÂ§ßÂ∞è
+
+// ÂÆö‰πâÁºìÂÜ≤Âå∫
+uint32_t source_buffer[DATA_SIZE];
+uint32_t destination_buffer[DATA_SIZE];
+
 void DMA_Init(void) 
-{// ≥ı ºªØDMA
-    //  πƒ‹DMA2 ±÷”
-    RCC_AHB1ENR |= RCC_AHB1ENR_DMA2EN;
-
-    // ≈‰÷√DMA¡˜
-    DMA_SxCR(2, 0) &= ~DMA_SxCR_CHSEL; // «Â≥˝Õ®µ¿—°‘ÒŒª
-    DMA_SxCR(2, 0) |= (0 << 25); // —°‘ÒÕ®µ¿
-    DMA_SxCR(2, 0) |= DMA_SxCR_DIR_MM; // …Ë÷√ ˝æ›¥´ ‰∑ΩœÚŒ™ƒ⁄¥ÊµΩƒ⁄¥Ê
-    DMA_SxCR(2, 0) |= DMA_SxCR_MINC ;
-	  DMA_SxCR(2, 0) |= DMA_SxCR_PINC; //  πƒ‹ƒ⁄¥Ê∫ÕÕ‚…Ëµÿ÷∑◊‘‘ˆ
-    DMA_SxCR(2, 0) |= DMA_SxCR_PL_VH; // …Ë÷√”≈œ»º∂Œ™∑«≥£∏ﬂ
-
-    // ≈‰÷√ ˝æ›¥Û–°∫Õ¥´ ‰ ˝¡ø
-    DMA_SxNDTR(2, 0) = DATA_SIZE;
-
-    // ≈‰÷√‘¥∫Õƒø±Íµÿ÷∑
-    DMA_SxPAR(2, 0) = SOURCE_ADDRESS;
-    DMA_SxM0AR(2, 0) = DESTINATION_ADDRESS;
-
-    //  πƒ‹DMA¡˜
-    DMA_SxCR(2, 0) |= DMA_SxCR_EN;
-}
-
-void DMA_RGB(void)
 {
-		//  πƒ‹DMA2 ±÷”
-    RCC_AHB1ENR |= RCC_AHB1ENR_DMA2EN;
-
-    // ≈‰÷√DMA¡˜
-    DMA_SxCR(2, 0) &= ~DMA_SxCR_CHSEL; // «Â≥˝Õ®µ¿—°‘ÒŒª
-    DMA_SxCR(2, 0) |= (0 << 25); // —°‘ÒÕ®µ¿
-    DMA_SxCR(2, 0) |= DMA_SxCR_DIR_MM; // …Ë÷√ ˝æ›¥´ ‰∑ΩœÚŒ™ƒ⁄¥ÊµΩƒ⁄¥Ê
-    DMA_SxCR(2, 0) |= DMA_SxCR_MINC ;
-	  DMA_SxCR(2, 0) |= DMA_SxCR_PINC; //  πƒ‹ƒ⁄¥Ê∫ÕÕ‚…Ëµÿ÷∑◊‘‘ˆ
-    DMA_SxCR(2, 0) |= DMA_SxCR_PL_VH; // …Ë÷√”≈œ»º∂Œ™∑«≥£∏ﬂ
-
-    // ≈‰÷√ ˝æ›¥Û–°∫Õ¥´ ‰ ˝¡ø
-    DMA_SxNDTR(2, 0) = DATA_SIZE;
-
-    // ≈‰÷√‘¥∫Õƒø±Íµÿ÷∑
-    DMA_SxPAR(2, 0) = SOURCE_ADDRESS;
-    DMA_SxM0AR(2, 0) = DESTINATION_ADDRESS;
-
-    //  πƒ‹DMA¡˜
-    DMA_SxCR(2, 0) |= DMA_SxCR_EN;
-}
-
-
-int main(void) 
-{ 	
-#if 0
-    // ÃÓ≥‰‘¥ª∫≥Â«¯
+	 // Â°´ÂÖÖÊ∫êÁºìÂÜ≤Âå∫
     for (uint32_t i = 0; i < DATA_SIZE; i++) 
 	{
-        source_buffer[i] = 100;
-
-		
+        source_buffer[i] = i;
     }
- 
-    // ≥ı ºªØDMA
-    DMA_Init();
-    // µ»¥˝DMA¥´ ‰ÕÍ≥…
-//ÕÍ≥…µ´ «¥ÌŒÛ
-        while (!(DMA2_LISR & DMA_LISR_TCIF0))
-//					{
-//								//led_red ();
-//		}
-//		    while (!(DMA2_LISR & DMA_LISR_HTIF0))	{
-//					    	led_green ();
-//		}
-//		    while (!(DMA2_LISR & DMA_LISR_TEIF0)){
-//								led_blue ();
-//		}
-		
-    // «Â≥˝¥´ ‰ÕÍ≥…±Í÷æ
-     DMA2_LISR &= ~DMA_LISR_TCIF0;
+	
+	  // ÂàùÂßãÂåñDMA
+    // ‰ΩøËÉΩDMA2Êó∂Èíü
+    RCC_AHB1ENR |= RCC_AHB1ENR_DMA2EN;
 
-    // ºÏ≤Èƒø±Íª∫≥Â«¯
-    for (uint32_t i = 0; i < DATA_SIZE; i++)
+ 
+    // ÈÖçÁΩÆÊï∞ÊçÆÂ§ßÂ∞èÂíå‰º†ËæìÊï∞Èáè
+    DMA_SxNDTR(2, 0) = DATA_SIZE;
+
+    // ÈÖçÁΩÆÊ∫êÂíåÁõÆÊ†áÂú∞ÂùÄ
+    DMA_SxPAR(2, 0) = SOURCE_ADDRESS;
+    DMA_SxM0AR(2, 0) = DESTINATION_ADDRESS;
+		
+
+		// ÈÖçÁΩÆDMAÊµÅ
+		//  DMA_SxCR(2, 0) =0; // Ê∏ÖÈô§
+    DMA_SxCR(2, 0) &=~ DMA_SxCR_EN;
+		DMA_SxCR(2, 0) |= (0 << 25); // ÈÄâÊã©ÈÄöÈÅì
+    DMA_SxCR(2, 0) |= DMA_SxCR_DIR_MM; // ËÆæÁΩÆÊï∞ÊçÆ‰º†ËæìÊñπÂêë‰∏∫ÂÜÖÂ≠òÂà∞ÂÜÖÂ≠ò
+    DMA_SxCR(2, 0) |= DMA_SxCR_MINC ;
+	  DMA_SxCR(2, 0) |= DMA_SxCR_PINC; // ‰ΩøËÉΩÂÜÖÂ≠òÂíåÂ§ñËÆæÂú∞ÂùÄËá™Â¢û
+    DMA_SxCR(2, 0) |= DMA_SxCR_PL_VH; // ËÆæÁΩÆ‰ºòÂÖàÁ∫ß‰∏∫ÈùûÂ∏∏È´ò
+		
+		
+		//ÈîôËØØÂéüÂõ†ÔºöËøô‰∏§Ë°åÔºå‰º†ËæìÊï∞ÊçÆÁöÑÂ§ßÂ∞èÊúâË¶ÅÊ±ÇÁöÑ
+    DMA_SxCR(2, 0) |= DMA_SxCR_MSIZE_WORD ;
+    DMA_SxCR(2, 0) |= DMA_SxCR_PSIZE_WORD ;
+
+    // ‰ΩøËÉΩDMAÊµÅ
+    DMA_SxCR(2, 0) |= DMA_SxCR_EN;
+		
+
+}
+
+
+#define RGB_SIZE   1
+
+uint16_t RGB_ADD[RGB_SIZE]={
+//	0xFFFFFFBF,//red
+//	0xFFFFFF7F,//green
+//	0x0,0x0,
+	0xFEFF,//blue
+};
+
+void DMA_RGB_Init(void) 
+{
+	 
+    // ‰ΩøËÉΩDMA2Êó∂Èíü
+    RCC_AHB1ENR |= RCC_AHB1ENR_DMA2EN;
+
+ 
+    // ÈÖçÁΩÆÊï∞ÊçÆÂ§ßÂ∞èÂíå‰º†ËæìÊï∞Èáè
+    DMA_SxNDTR(2, 1) = RGB_SIZE;
+
+    // ÈÖçÁΩÆÊ∫êÂíåÁõÆÊ†áÂú∞ÂùÄ
+    DMA_SxM0AR(2, 1) = (uint16_t )RGB_ADD;
+    DMA_SxPAR(2, 1) = (uint16_t )&(GPIOF->ODR);
+		
+
+		// ÈÖçÁΩÆDMAÊµÅ
+		//  DMA_SxCR(2, 0) =0; // Ê∏ÖÈô§
+    DMA_SxCR(2, 1) &=~ DMA_SxCR_EN;
+		DMA_SxCR(2, 1) |= (0 << 25); // ÈÄâÊã©ÈÄöÈÅì
+    DMA_SxCR(2, 1) |= DMA_SxCR_DIR_MP; // ËÆæÁΩÆÊï∞ÊçÆ‰º†ËæìÊñπÂêë‰∏∫ÂÜÖÂ≠òÂà∞Â§ñËÆæ
+    DMA_SxCR(2, 1) |= DMA_SxCR_MINC ;
+	  DMA_SxCR(2, 1) |= DMA_SxCR_PINC; // ‰ΩøËÉΩÂÜÖÂ≠òÂíåÂ§ñËÆæÂú∞ÂùÄËá™Â¢û
+    DMA_SxCR(2, 1) |= DMA_SxCR_PL_VH; // ËÆæÁΩÆ‰ºòÂÖàÁ∫ß‰∏∫ÈùûÂ∏∏È´ò
+		//DMA_SxCR(2, 0) |= DMA_SxCR_CIRC ;//Âæ™ÁéØÊ®°Âºè
+
+    DMA_SxCR(2, 1) |= DMA_SxCR_MSIZE_HWORD ;
+    DMA_SxCR(2, 1) |= DMA_SxCR_PSIZE_HWORD ;
+
+    // ‰ΩøËÉΩDMAÊµÅ
+    DMA_SxCR(2, 1) |= DMA_SxCR_EN;
+		
+		    if (DMA_SxCR(2, 1) & DMA_LISR_TCIF1) // Ê£ÄÊü•‰º†ËæìÂÆåÊàêÊ†áÂøó
+    {
+        DMA_SxCR(2, 1) &= ~DMA_LISR_TCIF1; // Ê∏ÖÈô§Ê†áÂøó
+			
+			if((GPIOF->ODR &(1UL<<8))==0)
+			{
+			led_red ();
+			
+			}
+
+
+    }
+		
+		
+		
+		
+		
+		
+	}
+int main(void) 
+{ 	
+//	
+//	led_config ();
+//	
+//	DMA_RGB_Init();
+
+
+	 //key();
+	 //buzzer ();
+/**/
+	
+	
+    // ÂàùÂßãÂåñDMA
+DMA_Init();
+    // Á≠âÂæÖDMA‰º†ËæìÂÆåÊàê
+while (!(DMA2_LISR & DMA_LISR_TCIF0));
+    // Ê∏ÖÈô§‰º†ËæìÂÆåÊàêÊ†áÂøó
+DMA2_LISR &= ~DMA_LISR_TCIF0;
+
+    // Ê£ÄÊü•ÁõÆÊ†áÁºìÂÜ≤Âå∫
+for (uint32_t i = 0; i < DATA_SIZE; i++)
 		{
         if (destination_buffer[i] != source_buffer[i])
 					{
-            // ¥´ ‰¥ÌŒÛ¥¶¿Ì
+            // ‰º†ËæìÈîôËØØÂ§ÑÁêÜ
             while (1)
 						{
-							led_red();
+							led_red(); 
 							
 						}
-	/*
-											
-//						int j=i;
-//						for(j=i;j>=0;j--)
-//						{
-//								led_blue ();
-//								delay (0xfff0ff);
-//								GPIOF->ODR |=(1UL<<8);
-//								delay (0xfffff);
-//						}
-//					   	  led_red();
-//								delay (0xffffff);
-//								GPIOF->ODR |=(1UL<<6);
-//								delay (0xfffff);
-//						if(i==99)
-//						{
-//								led_green ();
-//						}
-						
-	*/
-         }
-			}
-
-    // ¥´ ‰≥…π¶
-    while (1)
+	
+					}
+		}
+    // ‰º†ËæìÊàêÂäü
+while (1)
 		{
-		   led_green ();
+		  led_green ();
 		}
 		
-
-#endif	
-
-	
-	
-	
-	
-	
 	
 	}
 void SystemInit (void )
 {
 	
-/* ----------HSE----------£®≥…π¶£© */
-/* ≤Ω÷Ë
-//1.ø™HSE	    
+/* ----------HSE----------ÔºàÊàêÂäüÔºâ */
+/* Ê≠•È™§
+//1.ÂºÄHSE	    
 			//	RCC_CR  |= RCC_CR_HSEON;
-//2.µ»¥˝HSEŒ»∂®£¨≤¢«“ºÏ≤È
+//2.Á≠âÂæÖHSEÁ®≥ÂÆöÔºåÂπ∂‰∏îÊ£ÄÊü•
 			//	while(!(RCC_CR & RCC_CR_HSERDY ));
-	// œÎ“™∂‘’’ƒ≥“ªŒª «∑Ò“—æ≠ÕÍ≥…”≤º˛÷√1£¨∂®“Â“ª∏ˆ∏√ŒªŒ™1µƒ∫Í£¨≤¢Ω´œÎ“™∂‘’’µƒµÿ÷∑£¨œ‡”Î 
-//1.1.SW—°‘ÒŒ™hse
+	// ÊÉ≥Ë¶ÅÂØπÁÖßÊüê‰∏Ä‰ΩçÊòØÂê¶Â∑≤ÁªèÂÆåÊàêÁ°¨‰ª∂ÁΩÆ1ÔºåÂÆö‰πâ‰∏Ä‰∏™ËØ•‰Ωç‰∏∫1ÁöÑÂÆèÔºåÂπ∂Â∞ÜÊÉ≥Ë¶ÅÂØπÁÖßÁöÑÂú∞ÂùÄÔºåÁõ∏‰∏é 
+//1.1.SWÈÄâÊã©‰∏∫hse
 			//	RCC_CFGR |= RCC_CFGR_SW_HSE;
-//1.2.µ»¥˝”≤º˛≈‰÷√—°‘Ò∫√HSE
+//1.2.Á≠âÂæÖÁ°¨‰ª∂ÈÖçÁΩÆÈÄâÊã©Â•ΩHSE
 			//while ((RCC_CFGR & RCC_CFGR_SWS) != RCC_CFGR_SWS_HSE);
 */
 	
-/* ¥˙¬Î
+/* ‰ª£Á†Å
 		
 	
 	
@@ -328,18 +353,18 @@ void SystemInit (void )
 
 
 
-/* ----------HSI----------£®≥…π¶£©*/	
-/* ≤Ω÷Ë
-//1.ø™HSI	    
+/* ----------HSI----------ÔºàÊàêÂäüÔºâ*/	
+/* Ê≠•È™§
+//1.ÂºÄHSI	    
 				RCC_CR  |= RCC_CR_HSION;
-//2.µ»¥˝HSIŒ»∂®£¨≤¢«“ºÏ≤È
+//2.Á≠âÂæÖHSIÁ®≥ÂÆöÔºåÂπ∂‰∏îÊ£ÄÊü•
 				while(!(RCC_CR & RCC_CR_HSIRDY ));
-//1.1.SW—°‘ÒŒ™HSI
+//1.1.SWÈÄâÊã©‰∏∫HSI
 				RCC_CFGR |= RCC_CFGR_SW_HSI;
-//1.2.µ»¥˝”≤º˛≈‰÷√—°‘Ò∫√HSI
+//1.2.Á≠âÂæÖÁ°¨‰ª∂ÈÖçÁΩÆÈÄâÊã©Â•ΩHSI
 				while ((RCC_CFGR & RCC_CFGR_SWS) != RCC_CFGR_SWS_HSI);	
 */
-/* ¥˙¬Î
+/* ‰ª£Á†Å
 
 RCC_CR  |= RCC_CR_HSION;
 while(!(RCC_CR & RCC_CR_HSIRDY ));
@@ -352,27 +377,27 @@ while ((RCC_CFGR & RCC_CFGR_SWS) != RCC_CFGR_SWS_HSI);
 
 
 
-/* ----------PLL---------- (≥…π¶) */	
-/* ≤Ω÷Ë
+/* ----------PLL---------- (ÊàêÂäü) */	
+/* Ê≠•È™§
 	
-2.0 ¥Úø™HSE/HSI≤¢Œ»∂®‘À––£¨≤¢—°‘Ò	
-  —°‘ÒHSE◊˜Œ™ ±÷” ‰»Î	
-	RCC_PLLCFGR |=RCC_PLLCFGR_PLLSRC;  £®HSE£©
-	—°‘ÒHSI◊˜Œ™ ±÷” ‰»Î
-	RCC_PLLCFGR &=~RCC_PLLCFGR_PLLSRC; £®HSI£©
-2.1	≈‰÷√PLL≤Œ ˝		
+2.0 ÊâìÂºÄHSE/HSIÂπ∂Á®≥ÂÆöËøêË°åÔºåÂπ∂ÈÄâÊã©	
+  ÈÄâÊã©HSE‰Ωú‰∏∫Êó∂ÈíüËæìÂÖ•	
+	RCC_PLLCFGR |=RCC_PLLCFGR_PLLSRC;  ÔºàHSEÔºâ
+	ÈÄâÊã©HSI‰Ωú‰∏∫Êó∂ÈíüËæìÂÖ•
+	RCC_PLLCFGR &=~RCC_PLLCFGR_PLLSRC; ÔºàHSIÔºâ
+2.1	ÈÖçÁΩÆPLLÂèÇÊï∞		
 		RCC_PLLCFGR |=PLL_M_HSE ;
 		RCC_PLLCFGR |=PLL_N ;
 		RCC_PLLCFGR |=PLL_P ;
 		RCC_PLLCFGR |=PLL_Q ;	
 		RCC_PLLCFGR |=RCC_PLLCFGR_PLLSRC;		
 RCC_PLLCFGR = (PLL_M_HSE << 0) | (PLL_N << 6) | (PLL_P << 16) | (PLL_Q << 24) | (RCC_PLLCFGR_PLLSRC);
-2.2  πƒ‹PLL £¨≤¢µ»¥˝ÕÍ≥…
+2.2 ‰ΩøËÉΩPLL ÔºåÂπ∂Á≠âÂæÖÂÆåÊàê
 		RCC_CR |=RCC_CR_PLLON ;
 		while(!(RCC_CR & RCC_CR_PLLRDY ))	;	
-2.3 SW—°‘ÒPLL
+2.3 SWÈÄâÊã©PLL
 		RCC_CFGR |=RCC_CFGR_SW_PLL;
-2.4 µ»¥˝”≤º˛—°‘ÒÕÍ≥…	 	
+2.4 Á≠âÂæÖÁ°¨‰ª∂ÈÄâÊã©ÂÆåÊàê	 	
 		while ((RCC_CFGR & RCC_CFGR_SWS) != RCC_CFGR_SWS_PLL);
 
 */
@@ -382,20 +407,20 @@ RCC_PLLCFGR = (PLL_M_HSE << 0) | (PLL_N << 6) | (PLL_P << 16) | (PLL_Q << 24) | 
 	while((RCC_CR & RCC_CR_HSERDY )==0); 
 	
 	
-	// πƒ‹µÁ‘¥Ω”ø⁄ ±÷”
+	//‰ΩøËÉΩÁîµÊ∫êÊé•Âè£Êó∂Èíü
 //RCC_APB1ENR |= RCC_APB1ENR_PWREN;
 
 
 //PWR_CR |= PWR_CR_VOS;
 
 	
-// ≈‰÷√AHB∑÷∆µ∆˜
+// ÈÖçÁΩÆAHBÂàÜÈ¢ëÂô®
 RCC_CFGR |= AHB_PRESCALER ;
 
-// ≈‰÷√APB1∑÷∆µ∆˜
+// ÈÖçÁΩÆAPB1ÂàÜÈ¢ëÂô®
 RCC_CFGR |= APB1_PRESCALER ;
 
-// ≈‰÷√APB2∑÷∆µ∆˜
+// ÈÖçÁΩÆAPB2ÂàÜÈ¢ëÂô®
 RCC_CFGR |= APB2_PRESCALER ;
 	
 		RCC_PLLCFGR |=PLL_M_HSE ;
@@ -409,8 +434,8 @@ RCC_CFGR |= APB2_PRESCALER ;
   RCC_CR |=RCC_CR_PLLON ;
   while((RCC_CR & RCC_CR_PLLRDY ) == 0)	;
 	
-	/*Œ™ ≤√¥“ª∂®“™º”…œ’‚“ª––!!!!!!!!!!!!!!!!!!!!*/
-	//Flash‘§»°°¢÷∏¡Óª∫¥Ê°¢ ˝æ›ª∫¥Ê∫Õµ»¥˝◊¥Ã¨
+	/*‰∏∫‰ªÄ‰πà‰∏ÄÂÆöË¶ÅÂä†‰∏äËøô‰∏ÄË°å!!!!!!!!!!!!!!!!!!!!*/
+	//FlashÈ¢ÑÂèñ„ÄÅÊåá‰ª§ÁºìÂ≠ò„ÄÅÊï∞ÊçÆÁºìÂ≠òÂíåÁ≠âÂæÖÁä∂ÊÄÅ
 	FLASH_ACR = FLASH_ACR_PRFTEN | FLASH_ACR_ICEN |FLASH_ACR_DCEN |FLASH_ACR_LATENCY_5WS;
 
   RCC_CFGR |=RCC_CFGR_SW_PLL;
