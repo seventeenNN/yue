@@ -1,0 +1,18 @@
+--cpu=Cortex-M4.fp.sp
+"..\..\output\startup_stm32f40xx.o"
+"..\..\output\system_stm32f4xx.o"
+"..\..\output\stm32f4xx_qy_gpio.o"
+"..\..\output\stm32f4xx_qy_rcc.o"
+"..\..\output\stm32f4xx_qy_dma.o"
+"..\..\output\main.o"
+"..\..\output\bsp_led.o"
+"..\..\output\bsp_key.o"
+"..\..\output\bsp_dma.o"
+"..\..\output\stm32f4xx_it.o"
+"..\..\output\bsp_exti.o"
+"..\..\output\bsp_iwdg.o"
+"..\..\output\bsp_usart.o"
+--library_type=microlib --strict --scatter "..\..\Output\EXTI.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "..\..\Listing\EXTI.map" -o ..\..\Output\EXTI.axf

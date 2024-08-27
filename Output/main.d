@@ -1,0 +1,11 @@
+..\..\output\main.o: ..\..\User\main.c
+..\..\output\main.o: ..\..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
+..\..\output\main.o: ..\..\User\led\bsp_led.h
+..\..\output\main.o: ..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_qy_gpio.h
+..\..\output\main.o: ..\..\User\key\bsp_key.h
+..\..\output\main.o: ..\..\User\dma\bsp_dma.h
+..\..\output\main.o: ..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_qy_dma.h
+..\..\output\main.o: ..\..\User\./exti/bsp_exti.h
+..\..\output\main.o: ..\..\User\stm32f4xx_it.h
+..\..\output\main.o: ..\..\User\iwdg\bsp_iwdg.h
+..\..\output\main.o: ..\..\User\usart\bsp_usart.h
